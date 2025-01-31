@@ -1,6 +1,5 @@
 # Conciliador Bancário Sodexo
-
-## **30/01/2025**
+**30/01/2025**
 
 ## **VISÃO GERAL**
 
