@@ -2,9 +2,20 @@ import pandas as pd
 import numpy as np
 import time
 
+# Função para adicionar cor ao texto
+def colorir_log(texto, cor):
+    cores = {
+        'vermelho': '\033[91m',
+        'verde': '\033[92m',
+        'azul_claro': '\033[94m',
+        'amarelo': '\033[93m',
+        'reset': '\033[0m'
+    }
+    return f"{cores.get(cor, cores['reset'])}{texto}{cores['reset']}"
+
 # Registrar o tempo de início
 inicio_execucao = time.time()
-print("Execução iniciada...")
+print(colorir_log("Execução iniciada...", "azul_claro"))
 
 # Carregar os arquivos
 extrato_df = pd.read_excel("extrato.ods", engine="odf")
@@ -52,7 +63,9 @@ depositos_nao_conciliados = 0
 # Verificar para cada valor do extrato
 resultado = {}
 for deposito in depositos:
-    print(f"Analisando extrato de R$ {deposito:.2f}...")
+    # Exibir apenas o valor do extrato em azul
+    print(f"Analisando extrato de {colorir_log(f'R$ {deposito:.2f}', 'azul_claro')}...")
+    
     combinacao = encontrar_combinacoes_dp(creditos, deposito)
     depositos_analizados += 1
     if combinacao:
@@ -62,18 +75,19 @@ for deposito in depositos:
         creditos_conciliados = [
             f"{credito:.2f} ({resumos_creditos[i]})" for i, credito in enumerate(creditos) if credito in combinacao
         ]
-        print(f"Depósito R$ {deposito:.2f} - Encontrados registros congruentes: {', '.join(creditos_conciliados)}")
+        # Deixar a frase "Encontrados registros congruentes" em verde
+        print(f"{colorir_log('Encontrados registros congruentes', 'verde')}: {', '.join(creditos_conciliados)}")
     else:
         depositos_nao_conciliados += 1
-        print(f"Depósito R$ {deposito:.2f} - Não encontrados registros congruentes.")
+        print(f"Depósito {colorir_log(f'R$ {deposito:.2f}', 'azul_claro')} - {colorir_log('Não encontrados registros congruentes', 'vermelho')}.")
 
 # Exibir o resumo final
 total_encontrado = sum(resultado.keys())
 tempo_execucao = time.time() - inicio_execucao
 
-print("\nResumo da execução:")
-print(f"Total de depósitos analisados: {depositos_analizados}")
-print(f"Total de depósitos conciliados: {depositos_conciliados}")
-print(f"Total de depósitos não conciliados: {depositos_nao_conciliados}")
-print(f"Total encontrado: R$ {total_encontrado:.2f}")
-print(f"Tempo de execução: {tempo_execucao:.2f} segundos.")
+print(colorir_log("\nResumo da execução:", "amarelo"))
+print(colorir_log(f"Total de depósitos analisados: {depositos_analizados}", "azul_claro"))
+print(colorir_log(f"Total de depósitos conciliados: {depositos_conciliados}", "verde"))
+print(colorir_log(f"Total de depósitos não conciliados: {depositos_nao_conciliados}", "vermelho"))
+print(colorir_log(f"Total encontrado: R$ {total_encontrado:.2f}", "azul_claro"))
+print(colorir_log(f"Tempo de execução: {tempo_execucao:.2f} segundos.", "azul_claro"))
