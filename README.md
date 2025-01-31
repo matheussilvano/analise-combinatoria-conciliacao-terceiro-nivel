@@ -2,15 +2,15 @@
 
 ## **30/01/2025**
 
-# **VISÃO GERAL**
+## **VISÃO GERAL**
 
 O Conciliador Bancário Sodexo tem como objetivo desenvolver uma solução para a conciliação bancária da operadora Sodexo/Pluxee. Atualmente, não conseguimos realizar a conciliação automática devido à imprevisibilidade dos depósitos da operadora. Criamos um molde para o desenvolvimento de uma solução que possa auxiliar. A proposta é utilizar análise combinatória para conciliar extratos bancários e os valores pagos (créditos).
 
-# **OBJETIVOS**
+## **OBJETIVOS**
 
 1. Automatizar o processo da conciliação bancária da Sodexo (não funcional até o momento)
 
-# **ESPECIFICAÇÕES**
+## **ESPECIFICAÇÕES**
 
 Tecnologias Utilizadas:
 
